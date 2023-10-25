@@ -1,6 +1,5 @@
 @extends('Pelanggan.master')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <script>
         $(document).ready(function(){
           $("#baru").click(function(){
@@ -14,6 +13,13 @@
             $("#produkbaru").hide();
             $("#produkmurah").fadeIn();
             $("#produkurut").hide();
+            $("#produkasli").hide();
+          });
+
+          $("#produk").click(function(){
+            $("#produkbaru").hide();
+            $("#produkmurah").hide();
+            $("#produkurut").fadeIn();
             $("#produkasli").hide();
           });
         });
@@ -118,8 +124,30 @@
                         </div>
                     @endforeach
                     </div>
+
                     <div class="row " id="produkmurah" style="display:none;">
                     @foreach($produk3 as $pr)
+                        <div class="col-md pt-5">
+                            <form>
+                                <div class="card" style="width: 15rem; margin-bottom:20px">
+                                    <img src="{{ asset('fotoproduk/' . $pr->foto_produk) }}" class="card-img-top" height="200px">
+                                    <div class="card-body">
+                                        <a href="{{route('home.view', $pr->id)}}" style="text-decoration: none; color: black;">
+                                            <h5 class="card-title">{{$pr->nama_produk}}</h5>
+                                        </a>
+                                        <p class="card-text" style="color:red">Rp {{$pr->harga}}</p>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{route('home.view', $pr->id)}}" class="btn btn-outline-light" style="background-color:#7F9B6E;font-color:white;width:50%;border-radius:25px 25px 25px 25px" type="submit" name="submit" ><i class="fa fa-plus" aria-hidden="true" style="margin-right: 10px"></i> Beli</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endforeach
+                    </div>
+
+                    <div class="row " id="produkurut" style="display:none;">
+                    @foreach($produk4 as $pr)
                         <div class="col-md pt-5">
                             <form>
                                 <div class="card" style="width: 15rem; margin-bottom:20px">

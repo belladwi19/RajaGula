@@ -91,4 +91,22 @@ class AuthController extends Controller
     {
         return view('Pelanggan.register');
     }
+
+    public function proses_registerpelanggan(Request $request)
+    {
+        
+        User::create([
+            'name'          => $request -> name,
+            'password'      => Hash::make($request -> password),
+            'email'         => $request -> email,
+            'alamat'        => $request -> alamat,
+            'telepon'       => $request -> telepon,
+            'role'          => "User",
+            'foto'          => "User",
+        ]);
+        
+        $user = Auth::user();
+        $request->session()->put('user', $user);
+        return redirect('/loginpelanggan')->with('success', 'Registrasi Berhasil');
+    }
 }
