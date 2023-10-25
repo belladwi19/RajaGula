@@ -15,17 +15,24 @@ class PelangganHomeController extends Controller
         return view('Pelanggan.landing');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $produk = Produk::with(['kategori'])->get();
-
-        $produk2 = Produk::orderBy('created_at', 'asc')->get();
-
+        $categories = Kategori::all();
+        $selectedCategory = $request->input('category');
+    
+        $query = Produk::with('kategori');
+    
+        if ($selectedCategory) {
+            $query->where('kategori_id', $selectedCategory);
+        }
+    
+        $produk = $query->get();
+    
+        $produk2 = Produk::orderBy('created_at', 'desc')->get();
         $produk3 = Produk::orderBy('harga', 'asc')->get();
-
         $produk4 = Produk::orderBy('nama_produk', 'asc')->get();
-
-        return view('Pelanggan.page.home.home', compact('produk', 'produk2', 'produk3', 'produk4'));
+    
+        return view('Pelanggan.page.home.home', compact('produk', 'produk2', 'produk3', 'produk4', 'categories', 'selectedCategory'));
     }
 
     public function view($id)

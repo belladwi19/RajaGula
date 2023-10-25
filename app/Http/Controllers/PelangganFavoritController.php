@@ -59,11 +59,13 @@ class PelangganFavoritController extends Controller
     {
         $query = $request->input('query');
         $favorit = Favorit::with(['produk'])
-            ->whereHas('produk', function ($queryBuilder) use ($query) {
-                $queryBuilder->where('nama_produk', 'like', '%' . $query . '%');
-            })
-            ->whereHas('produk', function ($queryBuilder) use ($query) {
-                $queryBuilder->where('harga', 'like', '%' . $query . '%');
+            ->where('id_user', Auth::user()->id)
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->whereHas('produk', function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('nama_produk', 'like', '%' . $query . '%');
+                })->orWhereHas('produk', function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('harga', 'like', '%' . $query . '%');
+                });
             })
             ->paginate(5);
 

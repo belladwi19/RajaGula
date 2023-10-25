@@ -61,6 +61,7 @@
             </div>
             <div class="row">
             <div class="col">
+
                 <div class="col-md pt-5">
                     <h5>Urutkan :</h5>
                     <form>
@@ -89,7 +90,11 @@
                     <form method="GET">
                         <select name="category" id="category" class="form-control" onchange="this.form.submit()">
                             <option value="" style="color: black;">All Categories</option>
-
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ $category->id == $selectedCategory ? 'selected' : '' }} style="color: black;">
+                                    
+                                </option>
+                            @endforeach
                         </select>
                     </form>
                 </div>
