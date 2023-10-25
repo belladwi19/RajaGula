@@ -6,7 +6,7 @@
 </div>
 <div class="container mt-5 justify-content-center" id="cont">
     <div class="cont">
-    <form action="" method="" class="input-group mb-3">
+    <form action="{{ route('favorit.search') }}" method="" class="input-group mb-3">
             @csrf
             <input type="text" name="query" id="query" class="form-control" placeholder="Nama Produk">
             <div class="input-group-append">

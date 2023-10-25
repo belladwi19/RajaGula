@@ -55,4 +55,14 @@ class PelangganFavoritController extends Controller
         return redirect(route('favorit.index'))->with(['success' => 'Delete Favorit Berhasil']);
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $favorit = Favorit::with(['produk'])
+            ->where('id_user', Auth::user()->id)
+            ->paginate(5);
+
+        return view('Pelanggan.page.favorit.favorit', compact('favorit'));
+    }
+
 }

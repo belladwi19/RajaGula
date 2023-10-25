@@ -97,7 +97,7 @@ class AuthController extends Controller
 
         $request->validate([
             'name'     => 'required',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'email'    => 'required',
             'telepon'  => 'required',
             'alamat'  => 'required'
