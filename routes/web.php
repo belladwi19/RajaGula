@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\AdminHomeController;
 use App\Http\Controllers\AdminPelangganController;
@@ -19,7 +18,7 @@ use App\Http\Controllers\PelangganReviewController;
 
 use App\Http\Controllers\PDFController;
 
-use App\Http\Controllers\AuthPelangganController;
+use App\Http\Controllers\AuthController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('auth/redirect', [AuthController::class, 'redirectToGoogle']);
+Route::get('auth', [AuthController::class, 'handleGoogleCallback']);
 Route::get('login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
 
@@ -117,9 +118,10 @@ Route::prefix('/')->group(function () {
     Route::prefix('/favorit')->name('favorit.')->group(function () {
         Route::get('/', [PelangganFavoritController::class, 'index'])->name('index');
         Route::get('/create/{id}', [PelangganFavoritController::class, 'create'])->name('create');
-        Route::get('/delete/{id}', [PelangganFavoritController::class, 'delete'])->name('delete');
+        Route::get('/delete/{id}', [PelangganFavoritController::class, 'delete'])->name('delete');        
         Route::get('/search', [PelangganFavoritController::class, 'search'])->name('search');
     });
+    
 
     Route::prefix('/cart')->name('cart.')->group(function () {
         Route::get('/', [PelangganCartController::class, 'index'])->name('index');

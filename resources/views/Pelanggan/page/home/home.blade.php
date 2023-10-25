@@ -92,7 +92,7 @@
                             <option value="" style="color: black;">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ $category->id == $selectedCategory ? 'selected' : '' }} style="color: black;">
-                                    
+                                {{ $category->kategori }}
                                 </option>
                             @endforeach
                         </select>
