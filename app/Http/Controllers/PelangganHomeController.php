@@ -18,8 +18,10 @@ class PelangganHomeController extends Controller
     public function index()
     {
         $produk = Produk::with(['kategori'])->get();
-
-        return view('Pelanggan.page.home.home', compact('produk'));
+        $produk2 = Produk::orderBy('harga', 'desc')->get();
+        $produk3 = Produk::orderBy('harga', 'desc')->get();
+        
+        return view('Pelanggan.page.home.home', compact('produk', 'produk2', 'produk3'));
     }
 
     public function view($id)
