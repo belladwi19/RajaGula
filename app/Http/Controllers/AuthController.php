@@ -94,6 +94,11 @@ class AuthController extends Controller
 
     public function proses_registerpelanggan(Request $request)
     {
+
+        $request->validate([
+            'password' => 'required',
+            'email'    => 'required',
+        ]);
         
         User::create([
             'name'          => $request -> name,
