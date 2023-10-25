@@ -73,6 +73,12 @@
                           </ul>
                       </div>
                   @endif
+
+                  @if ($errors->has('password'))
+                      <div class="alert alert-danger">
+                          Password harus mengandung kombinasi huruf besar, huruf kecil, dan angka.
+                      </div>
+                  @endif
   
   
                   <div class="d-flex justify-content-center">

@@ -97,7 +97,7 @@ class AuthController extends Controller
 
         $request->validate([
             'name'     => 'required',
-            'password' => 'required|min:8|different:name',
+            'password' => 'required|min:8|different:name|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'email'    => 'required',
             'telepon'  => 'required',
             'alamat'  => 'required'
