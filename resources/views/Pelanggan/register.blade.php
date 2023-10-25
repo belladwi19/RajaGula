@@ -36,7 +36,7 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5" style="font-family: 'Montserrat'; color: #5e8148; "><b>Daftar</b></h2>
   
-                <form action="{{url('proses_registerpelanggan')}}" id="logForm">
+                <form action="{{url('proses_registerpelanggan')}}" method="POST" id="logForm">
                 {{ csrf_field() }}
   
                   <div class="form-outline mb-4">
