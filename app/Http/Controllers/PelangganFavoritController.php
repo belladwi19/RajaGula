@@ -60,6 +60,9 @@ class PelangganFavoritController extends Controller
         $query = $request->input('query');
         $favorit = Favorit::with(['produk'])
             ->where('id_user', Auth::user()->id)
+            ->whereHas('produk', function ($queryBuilder) use ($query) {
+                $queryBuilder->where('nama_produk', 'like', '%' . $query . '%');
+            })
             ->paginate(5);
 
         return view('Pelanggan.page.favorit.favorit', compact('favorit'));
