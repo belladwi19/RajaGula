@@ -6,6 +6,13 @@
 </div>
 <div class="container mt-5 justify-content-center" id="cont">
     <div class="cont">
+    <form action="" method="" class="input-group mb-3">
+            @csrf
+            <input type="text" name="query" id="query" class="form-control" placeholder="Nama Produk">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </form>
     <div class="isitabel">
 <table  class="table table-responsive table-bordered border-success">
     <thead class="table  table-success">

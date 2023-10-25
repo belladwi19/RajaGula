@@ -63,6 +63,16 @@
                     <label class="form-label" for="form3Example4cdg">Alamat</label>
                     <textarea name="alamat" id="alamat" rows="3" class="form-control py-3" ></textarea>
                   </div>
+
+                  @if ($errors->any())
+                      <div class="alert alert-danger">
+                          <ul>
+                              @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                              @endforeach
+                          </ul>
+                      </div>
+                  @endif
   
   
                   <div class="d-flex justify-content-center">
