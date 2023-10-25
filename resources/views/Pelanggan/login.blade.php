@@ -65,6 +65,11 @@
                     <i class="fab fa-google"></i> Login with Google
                   </a>
                   </div>
+                  <div class="justify-content-center align-items-center d-flex">
+                  <a href="" class="btn btn-facebook">
+                    <i class="fab fa-facebook"></i> Login with Facebook
+                  </a>
+                  </div>
               </div>
   
                   <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{{route('registerpelanggan')}}" class="fw-bold text-body"><u>Register here</u></a></p>
