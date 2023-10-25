@@ -35,6 +35,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('auth/redirect', [AuthController::class, 'redirectToGoogle']);
 Route::get('auth/callback', [AuthController::class, 'handleGoogleCallback']);
+
+Route::get('auth/redirect/facebook', [AuthController::class, 'redirectToFacebook']);
+Route::get('auth/callback/facebook', [AuthController::class, 'handleFacebookCallback']);
+
 Route::get('login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
 

@@ -147,7 +147,43 @@ class AuthController extends Controller
         } catch (Exception $e) {
             dd($e->getMessage());
         }
-
-
     }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback(Request $request)
+    {
+        try {
+            $user_facebook   = Socialite::driver('facebook')->user();
+            $user           = User::where('email', $user_facebook->getEmail())->first();
+
+            if($user != null){
+                Auth::login($user);
+                $request->session()->put('user', $user);
+                return redirect()->route('home.index');
+            }else{
+                User::Create([
+                    'email'             => $user_facebook->getEmail(),
+                    'name'              => $user_facebook->getName(),
+                    'password'          => 0,
+                    'email_verified_at' => now(),
+                    'telepon'           => 0,
+                    'alamat'            => "-",
+                    'status'            => "Aktif"
+                ]);
+        
+                
+                $user = Auth::user();
+                $request->session()->put('user', $user);
+                return redirect(route('home.index'));
+            }
+
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
 }
