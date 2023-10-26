@@ -151,39 +151,36 @@ class AuthController extends Controller
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->scopes(['email'])->redirect();
     }
 
     public function handleFacebookCallback(Request $request)
     {
         try {
-            $user_facebook   = Socialite::driver('facebook')->user();
-            $user           = User::where('email', $user_facebook->getEmail())->first();
+            $user_facebook = Socialite::driver('facebook')->user();
+            $user = User::where('email', $user_facebook->getEmail())->first();
 
-            if($user != null){
+            if ($user != null) {
                 Auth::login($user);
                 $request->session()->put('user', $user);
                 return redirect()->route('home.index');
-            }else{
-                User::Create([
+            } else {
+                User::create([
                     'email'             => $user_facebook->getEmail(),
                     'name'              => $user_facebook->getName(),
                     'password'          => 0,
                     'email_verified_at' => now(),
                     'telepon'           => 0,
                     'alamat'            => "-",
-                    'status'            => "Aktif"
+                    'status'            => "Aktif",
                 ]);
-        
-                
+
                 $user = Auth::user();
                 $request->session()->put('user', $user);
-                return redirect(route('home.index'));
+                return redirect()->route('home.index');
             }
-
         } catch (Exception $e) {
             dd($e->getMessage());
         }
     }
-
 }
